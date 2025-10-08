@@ -21,10 +21,10 @@ const questionSchema = new mongoose.Schema({
     {
       input: { type: String, required: true },
       output: { type: String, required: true },
-      hidden: { type: Boolean, default: false } // 👈 so you can hide some test cases
+      hidden: { type: Boolean, default: false } 
     }
   ],
-  languages: [{ type: String }], // e.g. ["cpp","python","java"]
+  languages: [{ type: String }], 
 }, { timestamps: true });
 const questions=mongoose.model("questions",questionSchema);
 app.get("/questions",async(req,res)=>{

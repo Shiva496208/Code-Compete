@@ -11,13 +11,13 @@ const userschema = new mongoose.Schema({
   avatar: { type: String, default: "" },
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 
-  // Stats (already exists)
+  
   stats: {
     battlesPlayed: { type: Number, default: 0 },
     battlesWon: { type: Number, default: 0 },
   },
 
-  // Battle history (already exists)
+  
   battleHistory: [
     {
       opponent: { type: String, },
@@ -26,7 +26,7 @@ const userschema = new mongoose.Schema({
     },
   ],
 
-  // Social links (added based on profile page JSX)
+ 
   socialLinks: {
     github: { type: String, default: "" },
     linkedin: { type: String, default: "" },
@@ -34,7 +34,7 @@ const userschema = new mongoose.Schema({
     email: { type: String, default: "" },
   },
 
-  // Optional rank field (commented in JSX but might be used later)
+ 
   rank: { type: String, default: "Unranked" },
 });
 mongoose.connect("mongodb://127.0.0.1:27017/codebattle")
@@ -69,7 +69,7 @@ try{
         return res.json({ success: false, error:"user not found"});
     }
   const ismatch=founduser.password==password;
-  // const token=jwt.sign({ username: user.username }, "secretkey", { expiresIn: "1h" });
+ 
   if(ismatch){
     return res.json({ success: true, });
   }else{
@@ -126,7 +126,7 @@ app.put("/updaterecord",async(req,res)=>{
           $push: {
             battleHistory: {
               $each:[{
-              opponent: opponent.username, // store ObjectId
+              opponent: opponent.username, 
               result:
                 winner === null
                   ? "draw"

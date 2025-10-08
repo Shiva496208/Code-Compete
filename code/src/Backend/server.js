@@ -7,19 +7,19 @@ const { Server } = require("socket.io");
 const app = express();
 const PORT = 5000;
 const rooms = {};
-// CORS setup
+
 app.use(cors({
   origin: "http://192.168.172.254:5173",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
 }));
 
-app.use(express.json()); // parse JSON automatically
+app.use(express.json()); 
 
-// Create HTTP server for Socket.IO
+
 const httpServer = createServer(app);
 
-// Socket.IO setup
+
 const io = new Server(httpServer, {
   cors: {
     origin: "http://192.168.172.254:5173",
@@ -64,19 +64,18 @@ io.to(roomid).emit("details",{users});
 });
 
 
-// Temporary storage for rooms
 
 
-// Route: Create a new room
+
 app.post("/rooms", (req, res) => {
   const details=req.body;
   console.log(details);
-  const roomId = nanoid(8); // Generate random 8-char room ID
+  const roomId = nanoid(8); 
   console.log("Room created:", roomId);
   res.json({ roomid: roomId });
 });
 
-// Optional health check
+
 app.get("/rooms/:roomId", (req, res) => {
   const{roomId}=req.params;
   const room=rooms[roomId];
@@ -86,8 +85,7 @@ app.get("/rooms/:roomId", (req, res) => {
   res.json({isexist:false});
   }
 });
-// console.log(onlineUsers);
-// Start server
+
 httpServer.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Backend running at http://192.168.238.254:${PORT}`);
 });
